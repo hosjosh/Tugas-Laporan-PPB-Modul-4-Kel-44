@@ -1,7 +1,7 @@
 export const ResepMinuman = {
   "resep": {
     "resep1": {
-      "id": 1,
+      "id": 101,
       "name": "Es Teh Manis",
       "ingredients": [
         "2 kantong teh celup",
@@ -18,7 +18,7 @@ export const ResepMinuman = {
       "image_url": "https://images.unsplash.com/photo-1460043838908-93987e531945?q=80&w=2075&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     },
     "resep2": {
-      "id": 2,
+      "id": 102,
       "name": "Kopi Susu",
       "ingredients": [
         "2 sdm kopi bubuk",
@@ -34,7 +34,7 @@ export const ResepMinuman = {
       "image_url": "https://images.unsplash.com/photo-1558884903-bbe59d6285ef?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     },
     "resep3": {
-      "id": 3,
+      "id": 103,
       "name": "Jus Alpukat",
       "ingredients": [
         "2 buah alpukat matang",
@@ -51,7 +51,7 @@ export const ResepMinuman = {
       "image_url": "https://prabumulihpos.bacakoran.co/upload/26df62cc22cbd7fe029c4c216eaa0a9f.jpg"
     },
     "resep4": {
-      "id": 4,
+      "id": 104,
       "name": "Es Jeruk Segar",
       "ingredients": [
         "4 buah jeruk manis",
@@ -68,7 +68,7 @@ export const ResepMinuman = {
       "image_url": "https://cdn1-production-images-kly.akamaized.net/jeo0JvL1tzY9F-toRZK0MX5599w=/1200x675/smart/filters:quality(75):strip_icc():format(webp)/kly-media-production/medias/4758697/original/016644100_1709283687-shutterstock_494695573.jpg"
     },
     "resep5": {
-      "id": 5,
+      "id": 105,
       "name": "Wedang Jahe",
       "ingredients": [
         "2 ruas jahe (geprek)",
@@ -85,7 +85,7 @@ export const ResepMinuman = {
       "image_url": "https://cdn0-production-images-kly.akamaized.net/JyUZUO9KaWAkk0O3ZeA0lpMYBtI=/0x476:5328x3479/1200x675/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/4540160/original/019142800_1692174322-shutterstock_2231007655.jpg"
     },
     "resep6": {
-      "id": 6,
+      "id": 106,
       "name": "Es Kopi Dalgona",
       "ingredients": [
         "2 sdm kopi instan",
@@ -103,7 +103,7 @@ export const ResepMinuman = {
       "image_url": "https://media.istockphoto.com/id/1222929863/id/foto/dalgona-kopi-dalam-gelas.jpg?s=612x612&w=0&k=20&c=HgqpCkKnXqmwKzY-CUK1yHwsPzrcjida3jS0AVs_5Cc="
     },
     "resep7": {
-      "id": 7,
+      "id": 107,
       "name": "Es Cendol",
       "ingredients": [
         "100 gram cendol",
@@ -119,7 +119,7 @@ export const ResepMinuman = {
       "image_url": "https://asset.kompas.com/crops/5-DCREkUHd6WM1-6Fj1GcQO6ydE=/0x0:1000x667/1200x800/data/photo/2020/06/23/5ef1b36539f22.jpg"
     },
     "resep8": {
-      "id": 8,
+      "id": 108,
       "name": "Milkshake Cokelat",
       "ingredients": [
         "2 scoop es krim cokelat",
@@ -136,7 +136,7 @@ export const ResepMinuman = {
       "image_url": "https://cdn0-production-images-kly.akamaized.net/U7eiy9TBhQckm4hFPCADUCieGaQ=/1x79:1000x642/500x281/filters:quality(75):strip_icc():format(webp)/kly-media-production/medias/4104980/original/077154900_1659069458-shutterstock_1540236731.jpg"
     },
     "resep9": {
-      "id": 9,
+      "id": 109,
       "name": "Es Buah Segar",
       "ingredients": [
         "100 gram semangka (potong dadu)",
@@ -153,7 +153,7 @@ export const ResepMinuman = {
       "image_url": "https://cdn0-production-images-kly.akamaized.net/tXrZbJSCfZMIVW21wTCq9AG4usQ=/800x450/smart/filters:quality(75):strip_icc():format(webp)/kly-media-production/medias/3391699/original/000783400_1614753202-675bd6a5-7c43-4c89-9ffe-a1de7acf563e.jpeg"
     },
     "resep10": {
-      "id": 10,
+      "id": 110,
       "name": "Lemon Tea",
       "ingredients": [
         "1 kantong teh celup",

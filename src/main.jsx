@@ -1,67 +1,56 @@
-// src/main.jsx
 import { StrictMode, useState } from 'react'
 import { createRoot } from 'react-dom/client'
-import SplashScreen from './pages/SplashScreen';
-import HomePage from './pages/HomePage';
-import MakananPage from './pages/MakananPage';
-import MinumanPage from './pages/MinumanPage';
-import ProfilePage from './pages/ProfilePage';
-import DesktopNavbar from './components/navbar/DesktopNavbar';
-import MobileNavbar from './components/navbar/MobileNavbar';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import SplashScreen from './pages/SplashScreen'
+import HomePage from './pages/HomePage'
+import RecipeList from './pages/RecipeList'
+import RecipeDetail from './pages/RecipeDetail'
+import Profile from './pages/Profile'
+import ProfilePage from './pages/ProfilePage'
+import MakananPage from './pages/MakananPage'
+import MinumanPage from './pages/MinumanPage'
+import FavoritePage from './pages/FavoritePage'
+import DesktopNavbar from './components/navbar/DesktopNavbar'
+import MobileNavbar from './components/navbar/MobileNavbar'
 import './index.css'
-import PWABadge from './PWABadge';
+import PWABadge from './PWABadge'
 
 function AppRoot() {
-  const [showSplash, setShowSplash] = useState(true);
-  const [currentPage, setCurrentPage] = useState('home');
+  const [showSplash, setShowSplash] = useState(true)
 
   const handleSplashComplete = () => {
-    setShowSplash(false);
-  };
-
-  const handleNavigation = (page) => {
-    setCurrentPage(page);
-  };
-
-  const renderCurrentPage = () => {
-    switch (currentPage) {
-      case 'home':
-        return <HomePage />;
-      case 'makanan':
-        return <MakananPage />;
-      case 'minuman':
-        return <MinumanPage />;
-      case 'profile':
-        return <ProfilePage />;
-      default:
-        return <HomePage />;
-    }
-  };
+    setShowSplash(false)
+  }
 
   if (showSplash) {
-    return <SplashScreen onComplete={handleSplashComplete} />;
+    return <SplashScreen onComplete={handleSplashComplete} />
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Desktop Navbar */}
-      <DesktopNavbar currentPage={currentPage} onNavigate={handleNavigation} />
-      
-      {/* Main Content */}
-      <main className="min-h-screen">
-        {renderCurrentPage()}
-      </main>
-      
-      {/* Mobile Navbar */}
-      <MobileNavbar currentPage={currentPage} onNavigate={handleNavigation} />
-
-      <PWABadge />
-    </div>
-  );
+    <Router>
+      <div className="min-h-screen bg-gray-50">
+        <DesktopNavbar />
+        <MobileNavbar />
+        <main className="min-h-screen">
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/resep" element={<RecipeList />} />
+            <Route path="/resep/:id" element={<RecipeDetail />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/profile-page" element={<ProfilePage />} />
+            <Route path="/makanan" element={<MakananPage />} />
+            <Route path="/minuman" element={<MinumanPage />} />
+            <Route path="/favorit" element={<FavoritePage />} />
+          </Routes>
+        </main>
+        <PWABadge />
+      </div>
+    </Router>
+  )
 }
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <AppRoot />
-  </StrictMode>,
+  </StrictMode>
 )

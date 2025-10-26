@@ -9,3 +9,11 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+/* Tambahan style untuk ikon hati favorit */
+.favorite-icon {
+  transition: color 0.2s;
+}
+.favorite-icon:hover {
+  color: darkred;
+}

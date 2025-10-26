@@ -1,23 +1,34 @@
 import { useState, useEffect, useRef } from 'react';
 import RecipeDetailModal from './RecipeDetailModal';
 import Pagination from '../common/Pagination';
+import { Heart } from 'lucide-react';
+import { getFavorites, setFavorites } from '../../utils/favoriteUtils';
 
 const PAGE_SIZE = 6;
 
 export default function RecipeGrid({ recipes }) {
-  const [searchQuery, setSearchQuery] = useState('');
   const [visibleCards, setVisibleCards] = useState(new Set());
   const cardRefs = useRef([]);
   const [selectedRecipe, setSelectedRecipe] = useState(null);
 
-  // Filter resep sesuai search
-  const filteredRecipes = recipes.filter(recipe =>
-    recipe.name.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  // FAVORIT STATE
+  const [favorites, setFavs] = useState(getFavorites());
 
+  function toggleFavorite(id) {
+    let favs = [...favorites];
+    if (favs.includes(id)) {
+      favs = favs.filter(fav => fav !== id);
+    } else {
+      favs.push(id);
+    }
+    setFavorites(favs);
+    setFavs(favs);
+  }
+
+  // Pagination
   const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = Math.ceil(filteredRecipes.length / PAGE_SIZE);
-  const paginatedRecipes = filteredRecipes.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE);
+  const totalPages = Math.ceil(recipes.length / PAGE_SIZE);
+  const paginatedRecipes = recipes.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE);
 
   useEffect(() => {
     cardRefs.current = cardRefs.current.slice(0, paginatedRecipes.length);
@@ -27,7 +38,7 @@ export default function RecipeGrid({ recipes }) {
           const index = parseInt(entry.target.dataset.index);
           setTimeout(() => {
             setVisibleCards(prev => new Set(prev).add(index));
-          }, (index % 3) * 150); 
+          }, (index % 3) * 150);
         }
       });
     }, { threshold: 0.1 });
@@ -44,39 +55,21 @@ export default function RecipeGrid({ recipes }) {
     };
   }, [paginatedRecipes, currentPage]);
 
-  // Reset ke halaman 1 bila search berubah
+  // Reset halaman ke 1 saat props recipes berubah (misal, search di parent)
   useEffect(() => {
     setCurrentPage(1);
-  }, [searchQuery]);
+  }, [recipes]);
 
   return (
     <section>
-      <h1 className="text-3xl md:text-5xl font-bold text-slate-800 text-center mb-4">
-        Jelajahi Resep Minuman
-      </h1>
-      <p className="text-center text-slate-500 max-w-2xl mx-auto mb-4">
-        Temukan minuman kesukaan kamu. Segar dan unik khas Indonesia.
-      </p>
-
-      {/* Search Bar */}
-      <div className="flex justify-center mb-8">
-        <input
-          type="text"
-          value={searchQuery}
-          onChange={e => setSearchQuery(e.target.value)}
-          placeholder="Cari minuman..."
-          className="w-full max-w-sm px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:border-blue-400"
-        />
-      </div>
-
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
         {paginatedRecipes.map((recipe, index) => (
-          <div 
-            key={recipe.id} 
+          <div
+            key={recipe.id}
             ref={el => cardRefs.current[index] = el}
             className={`group transform transition-all duration-700 ${
-              visibleCards.has(index) 
-                ? 'translate-y-0 opacity-100' 
+              visibleCards.has(index)
+                ? 'translate-y-0 opacity-100'
                 : 'translate-y-8 opacity-0'
             }`}
           >
@@ -86,12 +79,27 @@ export default function RecipeGrid({ recipes }) {
             >
               <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               <div className="relative h-32 md:h-56 overflow-hidden">
-                <img 
+                <img
                   src={recipe.image_url}
                   alt={recipe.name}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
+                {/* FAVORITE ICON */}
+                <button
+                  aria-label="Favorite"
+                  onClick={e => {
+                    e.stopPropagation();
+                    toggleFavorite(recipe.id);
+                  }}
+                  className="absolute top-2 right-2 p-2 bg-white rounded-full shadow transition-all"
+                >
+                  <Heart
+                    className="w-6 h-6"
+                    color={favorites.includes(recipe.id) ? "red" : "gray"}
+                    fill={favorites.includes(recipe.id) ? "red" : "none"}
+                  />
+                </button>
               </div>
               <div className="relative z-10 p-4 md:p-8">
                 <div className="flex items-center justify-between mb-3 md:mb-4">
@@ -109,9 +117,7 @@ export default function RecipeGrid({ recipes }) {
           </div>
         ))}
       </div>
-      {/* Pagination */}
       <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
-      {/* Detail Modal */}
       <RecipeDetailModal
         recipe={selectedRecipe}
         onClose={() => setSelectedRecipe(null)}
